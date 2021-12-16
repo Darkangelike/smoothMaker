@@ -1,6 +1,6 @@
 <?php
 
-$salt = "shin";
+$salt = "Chaeyoung";
 
 $input_username = false;
 if (isset($_POST["username"])) {
