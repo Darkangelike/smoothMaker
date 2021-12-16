@@ -15,145 +15,149 @@ if (isset($_GET["login"])) {
   $input_login = true;
 }
 
+$user_hint = false;
+$user_picture = false;
 
 $users = [
     [ "username" => "Marie",
-    "password" => "Overwatch"
+    "password" => "Overwatch",
+    "picture" => "https://external-preview.redd.it/KFhkmiKGL90-tbfk6xvJghTqD1LCn_zMmrC1OBleEAo.jpg?width=640&crop=smart&auto=webp&s=fe63c4b5b3ef48c75d24c7dc683311908b18b8f7",
+    "message" => "You are the boss!",
+    "hint" => "<strong>Hint :</strong> One of her favourite video games."
 ],
     [ "username" => "Julien",
-    "password" => "Audrey"
+    "password" => "JavaScript",
+    "message" => "Karim really drew a good pair for you.",
+    "picture" => "https://m.media-amazon.com/images/I/31tfpkeODQL._AC_SY1000_.jpg",
+    "hint" => "<strong>Hint :</strong> His favourite subject in this training course."
 ],
     [ "username" => "Florian",
-    "password" => "Fromage"
+    "password" => "Food",
+    "picture" => "https://images.fatherly.com/wp-content/uploads/2019/11/overeatingman-header.jpg?q=65&enable=upscale&w=1200",
+    "message" => "A rare historical picture of a Florian species in its natural habitat.",
+    "hint" => "<strong>Hint :</strong> His favourite topic (in English)."
 ],
     [ "username" => "Ruben",
-    "password" => "Trône"
+    "password" => "Siège",
+    "picture" => "https://st.depositphotos.com/1050267/5011/i/600/depositphotos_50113137-stock-photo-golden-toilet-isolated.jpg",
+    "message" => "He won Game of Thrones !",
+    "hint" => "<strong>Hint :</strong> He just bought a brand new and beautiful one. (write it in French)"
 ], 
     [ "username" => "Bagaudin",
-    "password" => "Absent"
+    "password" => "absents",
+    "picture" => "./40.png",
+    "message" => "",
+    "hint" => "<strong>Hint :</strong> Les ... ont toujours tort."
 ], 
     [ "username" => "Abdel",
-    "password" => "Papa"
+    "password" => "Father",
+    "picture" => "https://pics.me.me/when-you-have-curly-hair-and-someone-asks-why-you-23168986.png",
+    "message" => "So that is why he always wear a cap.",
+    "hint" => "<strong>Hint :</strong> He became one at the beginning of the training course!<br>Congratulations! (write it in English)"
 ], 
     [ "username" => "Amina",
-    "password" => "Covid"
+    "password" => "Covid-19",
+    "picture" => "https://image.freepik.com/free-photo/scientist-woman-investigating-vaccine-cure-disease-with-tired-sick-expression_1368-101889.jpg",
+    "message" => "Hopefully she is not sick with it !",
+    "hint" => "<strong>Hint :</strong> Maybe she caught it..."
 ], 
     [ "username" => "Hedi",
-    "password" => "Araignée"
+    "password" => "Spider",
+    "picture" => "zvmn8e2yvwh21.jpg",
+    "message" => "Meet Hedi's enemy.<br>
+    His true kryptonite.",
+    "hint" => "<strong>Hint :</strong> He found one alive in his sandwich. (write it in English)"
 ], 
     [ "username" => "Gislain",
-    "password" => "BN"
+    "password" => "BN",
+    "picture" => "https://static.boredpanda.com/blog/wp-content/uploads/2016/02/guy-falls-asleep-at-work-sleeping-office-prank-photoshop-21__700.jpg",
+    "message" => "He said \"don't wake him\" !",
+    "hint" => "<strong>Hint :</strong> The brand of a biscuit he always eats."
 ], 
     [ "username" => "Farid",
-    "password" => "Questions"
+    "password" => "Questions",
+    "picture" => "https://c.tenor.com/wLCja8tuXEsAAAAi/twist-street-bell.gif",
+    "message" => "Farid's new skill soon because of Isabelle blocking his view.",
+    "hint" => "<strong>Hint :</strong> He always has a lot of them to ask."
 ], 
     [ "username" => "Thomas",
-    "password" => "Blagues"
+    "password" => "Joke",
+    "picture" => "https://i.pinimg.com/originals/15/af/ea/15afea74e681617563886ca88af633cd.jpg",
+    "message" => "Is that the truth ?",
+    "hint" => "<strong>Hint :</strong> Whenever he opens his mouth, he blurts out one. (in English)"
 ], 
     [ "username" => "Souleyman",
-    "password" => "Basketball"
+    "password" => "Basketball",
+    "picture" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZfj6in5_Jec-58d6_4m5yDh8AWAa-aXklhu5TMdJd4gSBAUhAASysguPNOLsTTEpcj8&usqp=CAU",
+    "message" => "Ain't that the truth.",
+    "hint" => "<strong>Hint :</strong> He could have made a career in it."
 ], 
     [ "username" => "Karim",
-    "password" => "Rihanna"
+    "password" => "Mélinda",
+    "picture" => "./42.webp",
+    "message" => "His favourite woman ever, we all know it !",
+    "hint" => "<strong>Hint :</strong> The name of his scooter."
+], 
+    [ "username" => "?",
+    "password" => "",
+    "picture" => "",
+    "message" => "",
+    "hint" => "<strong>Hint :</strong>"
 ], 
     [ "username" => "Pierre",
-    "password" => "Bon"
-], 
-    [ "username" => "Pierre",
-    "password" => "Bon"
+    "password" => "Bon",
+    "picture" => "http://sms.hypotheses.org/files/2018/01/Piratey_vector_version.svg-385x500.png",
+    "message" => "His true name is Barberousse !<br> Always invading others' PCs !",
+    "hint" => "<strong>Hint :</strong> Son tic de language, un mot qu'il dit souvent."
 ]
 ];
 
-$title = '<div class="mt-3"><h1>Please sign in :</h1></div>';
+$title = 'Please sign in';
 $webContent = '
-<form class="text-center mt-2">
-    <ul>
-        <li><label for="username">Username</label></li>
+<div class="card container bg-secondary" style="width: 18rem;">
+<form class="text-center mt-1">
+    <ul class="m-0 p-0">
+        <li class="m-0 p-0"><label for="username">Username</label></li>
         <input id="username" name="username"></input>
-        <li><label for="password">Password</label></li>
+        <li class="m-0 p-0"><label for="password">Password</label></li>
         <input id="password" class="mb-3" name="password" ></input>
-        <li><button class="btn btn-dark" name="login" type="submit">Submit</button></li>
+        <li class="m-0 p-0"><button class="btn btn-dark" name="login" type="submit">Submit</button></li>
     
-<li class="mt-3"><button class="btn btn-info" name="hint0" value="true">Hint 1</button>
-<button class="btn btn-info" name="hint1" value="true">Hint 2</button></li>
+<li class="mt-3 mb-3 p-0"><button class="btn btn-info" name="hint0" value="true">Tip 1</button>
+<button class="btn btn-info" name="hint1" value="true">Tip 2</button></li>
 </ul>
-</form>';
+</form>
+</div>';
 
-$hint0 = '<p class="text-center">Username:<br>Sainte dans la classe.<br>Password :<br>Un de ses jeux vidéos prérféré.</p>';
-$hint1 = '<p class="text-center">Username:<br>Le plus jeune de la classe.<br>Password:<br>Un de ses derniers achat. Version GoT.</p>';
+$hint0 = '<p class="mt-2 text-center"><strong>Username :</strong><br>Type in your name or someone else\'s.<br><strong>Password :</strong><br>Submit a wrong one first to get a hint.</p>';
+$hint1 = '<p class="text-center mt-2">Mind the capital letter at the start of a word.</p>';
 
 $errorMessage = false;
 if ($input_login) {
 foreach ($users as $user) {
 
 if (!$input_username && !$input_password) {
-    $errorMessage = "<p>Please fill in the informations.</p>";
+    $errorMessage = 'Please fill in the informations.';
   } else if ( !$input_username ) {
-    $errorMessage = "<p>Please input your username.</p>";
+    $errorMessage = "Please input your username.";
   } else if (!$input_password) {
-    $errorMessage =  "<p>Please input your password.</p>";
-  } else if ($user["username"] == $input_username && $user["password"] != $input_password) {  
-   $errorMessage = "The password is incorrect.";
-  } else if ($user["username"] == $input_username && $user["password"] == $input_password) {
-      $webContent = '<div class="text-center mt-3">
-      <h1>You are the boss</h1>
-      <img src="https://external-preview.redd.it/KFhkmiKGL90-tbfk6xvJghTqD1LCn_zMmrC1OBleEAo.jpg?width=640&crop=smart&auto=webp&s=fe63c4b5b3ef48c75d24c7dc683311908b18b8f7">
-      </div>';
-      $errorMessage = false;
-      $title = false;
-} 
-
-
-
-}
-
-$title .= $errorMessage;
-}
-
-
-// if (!$input_username && !$input_password) {
-//     $errorMessage = "<p>Please fill in the informations.</p>";
-//   } else if (!$input_password) {
-//     $errorMessage =  "<p>Please input your password.</p>";
-//   } else if ( !$input_username ) {
-//     $errorMessage = "<p>Please input your username.</p>";
-//   } else if ( $user["username"] == $input_username && $user["password"] != $input_password ) {
-//   $errorMessage =  "<p>Incorrect password.</p>";
-//   } else if ($user["username"] != $input_username && $user["password"] != $input_password ) {
-//   $errorMessage =  "<p>This user does not exist.</p>";
-// } else if ($user["username"] == $input_username && $user["password"] == $input_password) {
-// $webContent = '<div class="text-center mt-3">
-// <h1>You are the boss</h1>
-// <img src="https://external-preview.redd.it/KFhkmiKGL90-tbfk6xvJghTqD1LCn_zMmrC1OBleEAo.jpg?width=640&crop=smart&auto=webp&s=fe63c4b5b3ef48c75d24c7dc683311908b18b8f7">
-// </div>';
-// $errorMessage = false;
-// }
-// }
-// } else {
-//   $errorMessage = false;
-// }
-
-
-// if ($user["username"] == $input_username && $user["password"] == $input_password) {
-// $webContent = '<div class="text-center mt-3">
-// <h1>You are the boss</h1>
-// <img src="https://external-preview.redd.it/KFhkmiKGL90-tbfk6xvJghTqD1LCn_zMmrC1OBleEAo.jpg?width=640&crop=smart&auto=webp&s=fe63c4b5b3ef48c75d24c7dc683311908b18b8f7">
-// </div>';
-// } ;
-// if ( $user["username"] == $input_username && $user["password"] != $input_password ) {
-//   $errorMessage = "Please input a valid password.";
-// } else if ( $user["username"] != $input_username && $user["password"] == $input_password) {
-//   $errorMessage = "Please input a valid username.";
-//   } else if ( !$input_username && !$input_password) {
-//     $errorMessage ="Please fill the informations.";
-//   } else if (!$input_password) {
-//     $errorMessage = "Please input your password.";
-//   } else {
-//     $errorMessage = "Please input your username.";
-//   }
-// }
-
-
+    $errorMessage =  "Please input your password.";
+  } else if ($user["username"] == $input_username) { 
+    if ($user["password"] == $input_password) { 
+          $webContent = '';
+          $user_picture = $user["picture"];
+          $title = $user["message"];
+          $errorMessage = false;
+          break;
+      } else {
+        $errorMessage = "The password is incorrect.<br>";
+        $user_hint = $user["hint"];
+        break;
+      } 
+  } else if ($user["username"] != $input_username ) {
+      $errorMessage ="This user does not exist.";
+  }
+}}
 ?>
 
 <!DOCTYPE html>
@@ -172,7 +176,6 @@ $title .= $errorMessage;
         list-style: none;
     }
     </style>
-
 <body>
 
 <header>
@@ -186,26 +189,19 @@ $title .= $errorMessage;
       <li class="nav-item active">
         <a class="nav-link" href="/verification/">Login <span class="sr-only">(current)</span></a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li> -->
     </ul>
   </div>
 </nav>
 </header>
 
 <main class="text-center container">
+    <h1 class="mt-3"><?= $title ?></h1>
+    <p class="pb-0 mb-0" style="color: red"><?= $errorMessage ?></p>
+    <p class="pb-0 mb-0"><?= $user_hint ?></p>
+    <img src="<?= $user_picture ?>">
+    
 <?php
-echo $input_username, $input_password;
-echo $title;
 echo $webContent ;
-
 if (isset ($_GET["hint0"])) {
     echo $hint0;
 };
