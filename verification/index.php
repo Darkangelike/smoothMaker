@@ -3,17 +3,17 @@
 $salt = "shin";
 
 $input_username = false;
-if (isset($_GET["username"])) {
-    $input_username = $_GET["username"];
+if (isset($_POST["username"])) {
+    $input_username = $_POST["username"];
 } else { };
 
 $input_password = false;
-if (isset($_GET["password"])) {
-    $input_password = md5($_GET["password"].$salt);
+if (isset($_POST["password"])) {
+    $input_password = md5($_POST["password"].$salt);
 };
 
 $input_login = false;
-if (isset($_GET["login"])) {
+if (isset($_POST["login"])) {
   $input_login = true;
 }
 
@@ -50,7 +50,7 @@ $users = [
     "password" => md5("absents".$salt),
     "picture" => "./40.png",
     "message" => "",
-    "hint" => "<strong>Hint :</strong> Les ... ont toujours tort."
+    "hint" => "<strong>Hint :</strong> Fill in the blanks in this sentence below. (in French)<br>Les ... ont toujours tort."
 ], 
     [ "username" => "Abdel",
     "password" => md5("Father".$salt),
@@ -125,7 +125,7 @@ $users = [
 $title = 'Please sign in';
 $webContent = '
 <div class="card container bg-secondary" style="width: 18rem;">
-<form class="text-center mt-1">
+<form class="text-center mt-1" method="post">
     <ul class="m-0 p-0">
         <li class="m-0 p-0"><label for="username">Username</label></li>
         <input id="username" name="username"></input>
@@ -227,10 +227,10 @@ if (!$input_username && !$input_password) {
     
 <?php
 echo $webContent ;
-if (isset ($_GET["hint0"])) {
+if (isset ($_POST["hint0"])) {
     echo $hint0;
 };
-        if (isset ($_GET["hint1"])) {
+        if (isset ($_POST["hint1"])) {
     echo $hint1;
 };
 
