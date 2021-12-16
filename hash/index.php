@@ -1,12 +1,31 @@
-<?php  
+<?php
 
-if (isset($_GET["username"]) && !$_GET["username"]) {
+$vraiMotDePasseCrypte = "1cc609bc9b49bac6201080d44cc44ef2";
+
+$motDePassEntre = "tartiflette";
+
+$salt = "hello";
+
+
+
+if (md5($motDePassEntre) == $vraiMotDePasseCrypte) {
+    echo "match";
+} else {
+    echo "does not match";
+}
+
+if (isset($_GET["username"])
+// && !$_GET["username"]
+) {
     $input_username = true;
 }
-if (isset($_GET["password"]) && !$_GET["password"]) {
+if (isset($_GET["password"])
+// && !$_GET["password"]
+) {
     $input_password = true;
 }
 
+$errorMessage = false;
 $isConnected = false;
 
 $webContent = "";
@@ -26,13 +45,13 @@ $users = [
     ["username" => "Nicolas",
     "password" => password_hash("Git", PASSWORD_DEFAULT)],
     ["username" => "Pierre",
-    "password" => "Linux"],
+    "password" => password_hash("Linux", PASSWORD_DEFAULT)],
     ["username" => "Pierre",
-    "password" => "PHP"],
+    "password" => password_hash("PHP", PASSWORD_DEFAULT)],
     ["username" => "Audrey",
-    "password" => "JavaScript"],
+    "password" => password_hash("JavaScript", PASSWORD_DEFAULT)],
     ["username" => "Nicolas",
-    "password" => "Angular"],
+    "password" => password_hash("Angular", PASSWORD_DEFAULT)],
 ];
 
 ?>
@@ -77,10 +96,13 @@ $users = [
 </nav>
     </header>   
     <main>
-        <?php if (!$isConnected) {
-            echo $form;
-        } else { echo "Hello ";
-        }
+        <?php
+            if (!$isConnected) {
+                echo $errorMessage;
+                echo $form;
+            } else {
+                echo $webContent;
+            }
             ?>
     </main>
     <footer>
