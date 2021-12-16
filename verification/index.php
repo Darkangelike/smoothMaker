@@ -109,10 +109,10 @@ $users = [
     "hint" => "<strong>Hint :</strong> His dog's breed."
 ], 
     [ "username" => "Pierre",
-    "password" => md5("Maintenant".$salt),
+    "password" => md5("Unicorn".$salt),
     "picture" => "http://sms.hypotheses.org/files/2018/01/Piratey_vector_version.svg-385x500.png",
     "message" => "His true name is Barberousse !<br> Always invading others' PCs !",
-    "hint" => "<strong>Hint :</strong> Son tic de language, un mot qu'il dit souvent."
+    "hint" => "<strong>Hint :</strong> An animal he loves. (in English)"
 ],
     [ "username" => "Isabelle",
     "password" => md5("Mask".$salt),
