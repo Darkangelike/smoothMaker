@@ -86,7 +86,7 @@ $users = [
     "message" => "Is that the truth ?",
     "hint" => "<strong>Hint :</strong> Whenever he opens his mouth, he blurts out one. (in English)"
 ], 
-    [ "username" => "Souleyman",
+    [ "username" => "Souleymane",
     "password" => "Basketball",
     "picture" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZfj6in5_Jec-58d6_4m5yDh8AWAa-aXklhu5TMdJd4gSBAUhAASysguPNOLsTTEpcj8&usqp=CAU",
     "message" => "Ain't that the truth.",
@@ -135,29 +135,29 @@ $hint1 = '<p class="text-center mt-2">Mind the capital letter at the start of a 
 $errorMessage = false;
 if ($input_login) {
 foreach ($users as $user) {
-
-if (!$input_username && !$input_password) {
-    $errorMessage = 'Please fill in the informations.';
-  } else if ( !$input_username ) {
-    $errorMessage = "Please input your username.";
-  } else if (!$input_password) {
-    $errorMessage =  "Please input your password.";
-  } else if ($user["username"] == $input_username) { 
-    if ($user["password"] == $input_password) { 
-          $webContent = '';
-          $user_picture = $user["picture"];
-          $title = $user["message"];
-          $errorMessage = false;
+  if (!$input_username && !$input_password) {
+      $errorMessage = 'Please fill in the informations.';
+    } else if ( !$input_username ) {
+      $errorMessage = "Please input your username.";
+    } else if (!$input_password) {
+      $errorMessage =  "Please input your password.";
+    } else if ($user["username"] == $input_username) { 
+      if ($user["password"] == $input_password) { 
+            $webContent = '';
+            $user_picture = $user["picture"];
+            $title = $user["message"];
+            $errorMessage = false;
+            break;
+        } else {
+          $errorMessage = "The password is incorrect.<br>";
+          $user_hint = $user["hint"];
           break;
-      } else {
-        $errorMessage = "The password is incorrect.<br>";
-        $user_hint = $user["hint"];
-        break;
-      } 
-  } else if ($user["username"] != $input_username ) {
-      $errorMessage ="This user does not exist.";
+        } 
+    } else if ($user["username"] != $input_username ) {
+        $errorMessage ="This user does not exist.";
+    }
   }
-}}
+}
 ?>
 
 <!DOCTYPE html>
