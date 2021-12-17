@@ -1,5 +1,7 @@
 <?php 
 
+// include_once "../htdocs/verification/logical.php";
+
 $eau = false;
 if (isset ($_GET["eau"])) {
   $eau = $_GET["eau"];
@@ -113,6 +115,13 @@ foreach ($fish as $aFish) {
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/hb/Fish/">About</a>
+        </li>
+        <li>
+          <form>
+          <input id="username" placeholder="Username"name="username"></input>
+          <input id="password" placeholder="Password"name="password" ></input>
+          <button class="btn btn-dark" name="login" type="submit">Submit</button>
+        </form>
         </li>
       </ul>
       <form class="d-flex">
