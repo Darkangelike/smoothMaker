@@ -1,86 +1,10 @@
 <?php 
-
-// include_once "../htdocs/verification/logical.php";
-
-$eau = false;
-if (isset ($_GET["eau"])) {
-  $eau = $_GET["eau"];
-}
-
-$isConnected = false;
-
-$users = [
-  [],
-  [],
-];
-
-$fish = [
-[
-    "nom"=>"Yellow",
-    "description"=>"A lively fish found in the sea.",
-    "prix"=>12,
-    "image"=>"https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Underwater/Yellow_Fish_PNG_Clipart.png?m=1557962098",
-    "eau" => "mer",
-    "isProtected" => false
-  ],
-[
-  "nom"=>"Blue",
-  "description"=>"Dory wannabe.",
-  "prix"=>15,
-  "image"=>"https://pics.clipartpng.com/midle/Blue_Fish_PNG_Clipart-426.png",
-  "eau" => "mer",
-    "isProtected" => false],
-[
-  "nom"=>"Green",
-  "description"=>"Very rare fish, perfect for kids' as a first pet.",
-  "prix"=>25,
-  "image"=>"https://i.pinimg.com/originals/0d/41/40/0d414090aea08ab3db86516d57d09022.jpg",
-  "eau" => "douce",
-    "isProtected" => false],
-[
-  "nom"=>"Orange Roughy",
-  "description"=>"Deep sea fish which has an exceptionally long lifespan, which can go beyond 140 years old.",
-  "prix"=>5,
-  "image"=>"https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL3RvcC0xMC1tb3N0LWVuZGFuZ2VyZWQtZmlzaDQuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoyOTB9LCJ0b0Zvcm1hdCI6ImF2aWYifX0=",
-  "eau" => "douce",
-    "isProtected" => true],
-[
-  "nom"=>"Black",
-  "description"=>"Do you think a black fish means bad luck the same as black cats do ?",
-  "prix"=>10,
-  "image"=>"https://www.fishkeepingworld.com/wp-content/uploads/2019/08/Black-Moor-Goldfish-Care.jpg?ezimgfmt=ng:webp/ngcb10",
-    "eau" => "douce",
-    "isProtected" => false],
-[
-  "nom"=>"Alosa alosa",
-  "description"=>"A fish which can live in both clear and salt water.",
-  "prix"=>10,
-  "image"=>"https://inpn.mnhn.fr/photos/uploads/webtofs/inpn/9/174829.jpg",
-    "eau" => "",
-    "isProtected" => false
-    ]
-];
-
-$pageContent = '';
-
-foreach ($fish as $aFish) {
-  
-    $fishCard = "<div class='card bg-light mb-3 ml-3 mr-3' name='{$aFish['eau']}' style='max-width: 20rem;'>
-            <div class='card-header text-center'>{$aFish['nom']}</div>
-            <div class='card-body'>
-                <div style='height: 250px' class='d-flex align-center'><img class='card-img-top' src='{$aFish['image']}' alt='Card image cap'></div>
-                <h4 class='card-title'>{$aFish['prix']}€</h4>
-                <p class='card-text'>{$aFish['description']}</p>
-            </div>
-            </div>";
-        
-           if (
-             (!$eau || $aFish["eau"] == $eau || $aFish["eau"] == "" ) &&
-             (!$aFish["isProtected"] || $isConnected )) {
-             $pageContent .= $fishCard;
-           }
-}
-
+session_start();
+// unset($_SESSION['isConnected']);
+unset($_SESSION["username"]);
+// session_unset();
+include_once "./authentification.php";
+include_once "./fish.php";
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +19,11 @@ foreach ($fish as $aFish) {
 
 </head>
 <body>
-
+  <?php
+    if ($isConnected) { 
+      echo $_SESSION["username"], " is connected : ", var_dump($isConnected);
+    }
+  ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <div class="container-fluid">
     <a class="navbar-brand randomColor" href="/hb/Fish/">The fishy place</a>
@@ -116,13 +44,29 @@ foreach ($fish as $aFish) {
         <li class="nav-item">
           <a class="nav-link" href="/hb/Fish/">About</a>
         </li>
-        <li>
-          <form>
-          <input id="username" placeholder="Username"name="username"></input>
+        <li class="align-self-center">
+          
+          <form method="post">
+            <?php
+          if (!$isConnected) {
+            echo '<input id="username" placeholder="Username"name="username"></input>
           <input id="password" placeholder="Password"name="password" ></input>
-          <button class="btn btn-dark" name="login" type="submit">Submit</button>
-        </form>
-        </li>
+          <button class="btn btn-success" name="login" type="submit">Submit</button>
+          </form>
+        ';
+          }
+          ?>
+          <li class=" nav-item" style="color: orange">
+        <?= $errorMessage; ?>
+        <?php
+        if($isConnected) {
+          echo "(", $_SESSION["username"], ")";
+          unset($_SESSION["isConnected"]) ;
+          echo $logoutButton ;
+        }
+          ?>
+          </form>
+          </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-sm-2" type="text" placeholder="Search">
