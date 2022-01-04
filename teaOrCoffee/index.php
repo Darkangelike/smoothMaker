@@ -51,6 +51,7 @@ require_once "logic.php";
 		</nav>
 			<div class="row">
 				<?= $pageContent ?>
+				<?= $host ?>
 			</div>
 	</body>
 </html>

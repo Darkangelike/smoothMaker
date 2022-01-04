@@ -1,0 +1,32 @@
+body,
+html {
+	height: 100%;
+	background-image: url("../images/bg.jpg");
+	height: 100%;
+	background-position: center;
+	background-size: cover;
+}
+
+div.col-md-10 {
+	right: 50%;
+	left: 50%;
+	height: 200px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+div.text {
+	background: rgba(0, 0, 0, 0.5);
+	display: inline-block;
+	width: 150px;
+}
+
+img.green {
+	width: 20px;
+	height: 20px;
+}
+img.blue {
+	width: 40px;
+	height: 40px;
+}

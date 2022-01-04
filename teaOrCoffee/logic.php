@@ -4,6 +4,7 @@ session_start();
 
 $password = "Michaeng";
 $isConnected = false;
+$host = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
 // Checking if the user is ALREADY logged in
 if (isset ($_SESSION["isConnected"]) && $_SESSION["isConnected"] ) {
@@ -14,6 +15,12 @@ if (isset ($_SESSION["isConnected"]) && $_SESSION["isConnected"] ) {
 if (isset($_POST["logout"]) && $_POST["logout"]) {
     unset($_SESSION["isConnected"]);
     $isConnected = false;
+    $host = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    if ($host == "localhost/teaOrCoffee/?drink=soku") {
+        header("Location: http://localhost/teaOrCoffee/");
+        exit();
+    }
+
 } else {
     $_SESSION["logout"] = false;
 }
