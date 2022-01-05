@@ -6,6 +6,7 @@ require_once "db.php";
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script src="https://kit.fontawesome.com/27d8ccfd65.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://bootswatch.com/5/sketchy/bootstrap.min.css">
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -81,12 +82,18 @@ require_once "db.php";
 				</form>
 			<?php } ?>
 
-			<?php foreach($messages as $message) { $id = $message["id"];	?>
+			<?php foreach($messages as $message) { ?>
 			<hr>
 				<div class="container">
 					
-					<form method="post" action="/Messages/deleteMessage.php">
-						<button type="submit" name="delete" value="<?= $id ?>" class="btn btn-danger" style="float:right">
+					<form method="post" action="/Messages/editMessage.php" style="float:right">
+						<button type="submit" name="edit" value="<?= $message["id"] ?>" class="btn btn-primary" >
+							<strong><i class="fas fa-edit"></i></strong>
+						</button>
+					</form>
+
+					<form method="post" action="/Messages/deleteMessage.php" style="float:right">
+						<button type="submit" name="delete" value="<?= $message["id"] ?>" class="btn btn-danger" >
 							<strong>X</strong>
 						</button>
 					</form>

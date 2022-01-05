@@ -1,7 +1,6 @@
 <?php
 
 require_once "db.php" ;
-require_once "logic.php";
 
 if (isset($_POST["delete"])) {
     $id = $_POST["delete"];
@@ -23,3 +22,4 @@ if ($success) {
 }
 
 ?>
+
