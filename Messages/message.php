@@ -1,30 +1,5 @@
 <?php
-
-$test = false;
-require_once "db.php";
 require_once "logic.php";
-
-if ($test) {
-  echo "<br>Success or failure of the request:<br>";
-  if ($message) {
-    echo "Message was recuperated<br>";
-  } else {
-  echo "Error: " . $request . "<br>" . mysqli_error($myConnection);
-  }
-
-  echo "<br>Echo of the request:<br>";
-  echo $request;
-
-  echo "<br>var dump of messages:<br>";
-  var_dump($message);
-
-} else {
-  if (!$message) {
-    echo "<br>Success or failure of the request:<br>";
-    echo "Error: " . $request . "<br>" . mysqli_error($myConnection);
-  }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -84,29 +59,60 @@ if ($test) {
 		<main>
 
 		<div class="container mt-4">
+			<nav class="navbar"><h1>Official members messages</h1></nav>
 
-      <?php if (isset($id) && $id) { ?>
-          <form class="mb-3 pt-3" action="/Messages/editMessage.php" method="POST">
-              <div class="d-flex flex-column align-items-center justify-content-center">
-                <h1>Message edit</h1>
-                <div>
-                  <input type="text" name="username" placeholder="Your name" value="<?= $message["author"] ?>">
-                  <input type="color" name="color" value="<?= $message["color"] ?>">
-                </div>
-                <textarea class="mt-2 mb-3" name="message" placeholder="Your message"><?= $message["description"] ?></textarea>
-                <button class="btn btn-info" type="submit" name="editSubmitted" value="<?= $id ?>">Edit</button>
-                
-              </div>
-            </form>
-              <?php } else if (isset($editSubmitted) && $editSubmitted) { ?>
-                <p><i class="far fa-check-circle" style="color:green; font-size:20px"></i> The edition was successful!<br><br>
-                  You will be redirected to the main page.</p>
-              <?php 
-                header("refresh:3; url=index.php");
-                exit;
-              } ?>
-    </div>
-</div>
-</body>
+			<?php if (isset($display) && $display) { ?>
+
+			<form class="mb-3 pt-3" action="/messages/createMessage.php" method="POST">
+				<div class="d-flex flex-column align-items-center justify-content-center">
+					<nav class="navbar mb-3">Your new message</nav>
+					<div>
+						<input type="text" name="username" placeholder="Your name">
+						<input type="color" name="color">
+					</div>
+					<textarea class="mt-2 mb-3" name="message" placeholder="Your message"></textarea>
+					<button class="btn btn-info" type="submit">Send</button>
+					
+				</div>
+			</form>
+			 <?php } else if (!isset($id)){ ?>
+
+				<form action="index.php">
+					<div class="d-flex flex-column align-items-center justify-content-center pt-4 pb-2">
+						<button class="btn btn-secondary" type="submit" name="display">Write a new message</button>
+					</div>
+				</form>
+			<?php } ?>
+
+			<?php if (isset($message) && $message) { ?>
+				<hr>
+					<div class="container">
+				
+							
+							<form action="/messages/index.php" style="float:right">
+								<button type="submit" name="edit" value="<?= $id ?>" class="btn btn-primary" >
+									<i class="fas fa-edit"></i>
+								</button>
+							</form>
+
+							<form method="post" action="/messages/deleteMessage.php" style="float:right">
+								<button type="submit" name="delete" value="<?= $id ?>" class="btn btn-danger" >
+									<strong>X</strong>
+								</button>
+							</form>
+							<p>
+								<b><h3 style="color:<?= $message["color"] ?>" class="mb-0 pb-0">
+								<?= $message["author"] ?>:</h3></b><br>
+								<?= strip_tags($message["description"]) ?>
+							</p>
+					</div>
+				<hr>
+
+			<?php } ?>
+
+		</div>
+
+		</main>
+
+    </body>
 </html>
-

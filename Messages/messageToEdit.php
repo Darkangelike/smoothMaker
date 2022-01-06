@@ -1,28 +1,24 @@
 <?php
 
-$test = false;
 require_once "db.php";
 require_once "logic.php";
 
-if ($test) {
-  echo "<br>Success or failure of the request:<br>";
-  if ($message) {
-    echo "Message was recuperated<br>";
-  } else {
-  echo "Error: " . $request . "<br>" . mysqli_error($myConnection);
-  }
+if (isset($_GET["edit"]) && $_GET["edit"]) {
+    $id = htmlspecialchars($_GET["edit"]);
 
-  echo "<br>Echo of the request:<br>";
-  echo $request;
+    $request = "SELECT messages.author, messages.description, messages.color FROM messages where id=" . $id;
 
-  echo "<br>var dump of messages:<br>";
-  var_dump($message);
 
-} else {
-  if (!$message) {
-    echo "<br>Success or failure of the request:<br>";
-    echo "Error: " . $request . "<br>" . mysqli_error($myConnection);
-  }
+    $result = mysqli_query($myConnection, $request);
+
+    $message = $result->fetch_assoc();
+    var_dump($message);
+    // echo "<br>";
+    // var_dump(get_object_vars($message));
+    // echo "<br>";
+    // $message = (array) $message;
+    // var_dump($message);
+    // echo $message["author"];
 }
 
 ?>
@@ -82,31 +78,11 @@ if ($test) {
 		</nav>
 		
 		<main>
-
-		<div class="container mt-4">
-
-      <?php if (isset($id) && $id) { ?>
-          <form class="mb-3 pt-3" action="/Messages/editMessage.php" method="POST">
-              <div class="d-flex flex-column align-items-center justify-content-center">
-                <h1>Message edit</h1>
-                <div>
-                  <input type="text" name="username" placeholder="Your name" value="<?= $message["author"] ?>">
-                  <input type="color" name="color" value="<?= $message["color"] ?>">
-                </div>
-                <textarea class="mt-2 mb-3" name="message" placeholder="Your message"><?= $message["description"] ?></textarea>
-                <button class="btn btn-info" type="submit" name="editSubmitted" value="<?= $id ?>">Edit</button>
-                
-              </div>
-            </form>
-              <?php } else if (isset($editSubmitted) && $editSubmitted) { ?>
-                <p><i class="far fa-check-circle" style="color:green; font-size:20px"></i> The edition was successful!<br><br>
-                  You will be redirected to the main page.</p>
-              <?php 
-                header("refresh:3; url=index.php");
-                exit;
-              } ?>
-    </div>
-</div>
+            <div class="container mt-4">
+                <div class="d-flex flex-column align-items-center justify-content-center"><nav class="navbar"><h1>Message to edit</h1></nav></div>
+			    <h1><? $message["author"] ?></h1>
+            </div>
+        </main>
 </body>
 </html>
 
