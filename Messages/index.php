@@ -100,7 +100,7 @@ require_once "logic.php";
 								<i class="far fa-edit"></i>
 							</button>
 						</form>
-						<form action="/messages/index.php" style="float:right">
+						<form action="/messages/message.php" style="float:right">
 							<button type="submit" name="edit" value="<?= $message["id"] ?>" class="btn btn-primary" >
 								<i class="far fa-eye"></i>
 							</button>

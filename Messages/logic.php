@@ -32,8 +32,12 @@ $display = true;
 
 // SQL REQUEST TO THE DATABASE
 
-if (isset($_GET["edit"]) && $_GET["edit"]) {
-    $id = htmlspecialchars($_GET["edit"]);
+if ((isset($_GET["edit"]) && $_GET["edit"]) || (isset($_GET["showForm"]) && $_GET["showForm"])) {
+    if (isset($_GET["edit"])) {
+        $id = htmlspecialchars($_GET["edit"]);
+    } else if (isset($_GET["showForm"])) {
+        $id = htmlspecialchars($_GET["showForm"]);
+    }
 
     $request = "SELECT messages.author, messages.description, messages.color FROM messages where id=" . $id;
 
