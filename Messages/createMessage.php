@@ -13,12 +13,18 @@ if (isset($_POST["message"]) && !empty($_POST["message"])) {
     $newMessage = htmlspecialchars($_POST["message"]);
 }
 
-echo $newUsername;
-echo $newMessage;
+if (isset($_POST["color"]) && !empty($_POST["color"])) {
+    $newColor = htmlspecialchars($_POST["color"]);
+}
+
+
+echo "New username: " . $newUsername . "<br>";
+echo "New message: " . $newMessage . "<br>";
+echo "New color: " . $newColor . "<br>";
 
 //$_POST
 
-$request = "INSERT INTO messages (author, description) VALUES ('$newUsername', '$newMessage')";
+$request = "INSERT INTO messages (author, description, color) VALUES ('$newUsername', '$newMessage', '$newColor')";
 
 // Check if the request was a success or failure
 

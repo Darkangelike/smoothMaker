@@ -1,6 +1,5 @@
 <?php
 require_once "logic.php";
-require_once "db.php";
 ?>
 
 <!DOCTYPE html>
@@ -67,8 +66,11 @@ require_once "db.php";
 			<form class="mb-3 pt-3" action="/Messages/createMessage.php" method="POST">
 				<div class="d-flex flex-column align-items-center justify-content-center">
 					<nav class="navbar mb-3">Your new message</nav>
-					<input type="text" name="username" placeholder="Your name">
-					<textarea name="message" placeholder="Your message"></textarea>
+					<div>
+						<input type="text" name="username" placeholder="Your name">
+						<input type="color" name="color">
+					</div>
+					<textarea class="mt-2 mb-3" name="message" placeholder="Your message"></textarea>
 					<button class="btn btn-info" type="submit">Send</button>
 					
 				</div>
@@ -82,28 +84,30 @@ require_once "db.php";
 				</form>
 			<?php } ?>
 
-			<?php foreach($messages as $message) { ?>
-			<hr>
-				<div class="container">
-					
-					<form method="post" action="/Messages/editMessage.php" style="float:right">
-						<button type="submit" name="edit" value="<?= $message["id"] ?>" class="btn btn-primary" >
-							<strong><i class="fas fa-edit"></i></strong>
-						</button>
-					</form>
+			<?php if ($messages) {
+				foreach($messages as $message) { ?>
+					<hr>
+					<div class="container">
+							
+						<form method="post" action="/Messages/editMessage.php" style="float:right">
+							<button type="submit" name="edit" value="<?= $message["id"] ?>" class="btn btn-primary" >
+								<i class="fas fa-edit"></i>
+							</button>
+						</form>
 
-					<form method="post" action="/Messages/deleteMessage.php" style="float:right">
-						<button type="submit" name="delete" value="<?= $message["id"] ?>" class="btn btn-danger" >
-							<strong>X</strong>
-						</button>
-					</form>
-					<p>
-						<b><h3 style="color:<?= $message["color"] ?>" class="mb-0 pb-0">
-						<?= $message["author"] ?>:</h3></b><br>
-						<?= strip_tags($message["description"]) ?>
-					</p>
-				</div>
-			<?php } echo "<hr>"; ?>
+						<form method="post" action="/Messages/deleteMessage.php" style="float:right">
+							<button type="submit" name="delete" value="<?= $message["id"] ?>" class="btn btn-danger" >
+								<strong>X</strong>
+							</button>
+						</form>
+						<p>
+							<b><h3 style="color:<?= $message["color"] ?>" class="mb-0 pb-0">
+							<?= $message["author"] ?>:</h3></b><br>
+							<?= strip_tags($message["description"]) ?>
+						</p>
+					</div>
+				<?php }
+			} echo "<hr>"; ?>
 
 		</div>
 
