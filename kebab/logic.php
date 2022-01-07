@@ -6,6 +6,4 @@ $sql = "SELECT * FROM kebabs";
 
 $kebabs = mysqli_query($myConnection, $sql);
 
-
-
 ?>

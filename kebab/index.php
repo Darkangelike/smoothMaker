@@ -1,5 +1,6 @@
 <?php
 require_once "logic.php";
+require_once "ingredients.php";
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +31,32 @@ require_once "logic.php";
 					<h1>List of fakebabs</h1>
 					<hr>
 					<!-- kebab + meat name + garnish name + sauce name + (difficulty)  -->
-					<h3>Kebab (meat 1) + no garnish + (sauce 1) + (1 star difficulty)</h3>
+
+
+					<?php foreach($kebabs as $kebab) { ?>
+					<h3><?= $meat[$kebab["meat"]] ?> + <?= $kebab["garnish"] ?> + <?= $sauce[$kebab["sauce"]] ?> + <?= $kebab["difficulty"] ?></h3>
 					<p>A kebab that lacks inspiration</p>
+					
 					<hr>
+					<?php } ?>
+
+
 				</div>
 				
 
 		</main>
 	</body>
 </html>
+
+<?php /* foreach($kebabs as $kebab) { ?>
+					<h3><?= $meat[$kebab["meat"]] ?>
+					  +
+					 <?= $kebab["garnish"] ?>
+					  + 
+					  <?= $sauce[$kebab["sauce"]] ?>
+					   + 
+					   <?= $kebab["difficulty"] ?>
+					</h3>
+					<p>A kebab that lacks inspiration</p>
+					<hr>
+					<?php } */ ?> 
