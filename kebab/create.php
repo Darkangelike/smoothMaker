@@ -6,7 +6,7 @@ var_dump($_POST);
 echo "<br><br>";
 if (
     isset($_POST["create"])
-    // && !empty($_POST["meat"]) && ctype_digit($_POST["meat"])
+    && !empty($_POST["meat"]) && ctype_digit($_POST["meat"])
     && !empty($_POST["garnish"])
     && !empty($_POST["sauce"]) && ctype_digit($_POST["sauce"])
     // && !empty($_POST["difficulty"]) && ctype_digit($_POST["difficulty"])
@@ -17,7 +17,7 @@ if (
     $garnish = $_POST["garnish"];
     $idDifficulty = $_POST["difficulty"];
 
-    echo "ID meat : " . $idMeat . "<br>ID sauce : " . $idSauce . "<br>Garnish : " . $garnish . "<br>Difficulty : " . $idDifficulty . "<br>";
+    echo "ID meat : " . $idMeat . "<br>Garnish : " . $garnish . "<br>Sauce : " . $idSauce . "<br>Difficulty : " . $idDifficulty . "<br>";
 
     $sql = "INSERT INTO akebabs (meat, sauce, garnish, difficulty) VALUES ($idMeat, $idSauce, '$garnish', '$idDifficulty')";
 
