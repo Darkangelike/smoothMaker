@@ -6,6 +6,7 @@ require_once "ingredients.php";
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script src="https://kit.fontawesome.com/27d8ccfd65.js" crossorigin="anonymous"></script>
 		<!-- CSS only -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -37,15 +38,31 @@ require_once "ingredients.php";
 							
 				<div class="container">
 					<h1>List of fakebabs</h1>
-					<?php if (isset($_GET["add"])) { ?>
-						<form method="POST" action="">
-							<button type="submit" class="btn" style="color:teal">Add</button>
-						</form>
-					<?php } ?>
 					<hr>
-					<!-- kebab + meat name + garnish name + sauce name + (difficulty)  -->
+
+					<!-- LOOP ON KEBABS VARIABLE TAKEN FROM DB -->
 					
 					<?php  foreach($kebabs as $kebab) { ?>
+						
+					<!-- BUTTONS CONTAINER -->
+					<div class="container">
+
+						<!-- DELETE BUTTON -->
+
+						<form action="delete.php" method="post">
+							<button style="float:right" class="btn btn-danger" type="submit" value="<?= $kebab["id"] ?>" name="delete">X</button>
+						</form>
+
+						<!-- EDIT BUTTON -->
+
+						<form action="create.php" style="float:right">
+							<button type="submit" name="id" value="<?= $kebab["id"] ?>" class="btn btn-primary" >
+								<i class="far fa-edit m-0 p-0"></i>
+							</button>
+						</form>
+
+					</div>
+
 					<h3><?= $meats[$kebab["meat"]] ?>
 					+
 					<?= $kebab["garnish"] ?>
@@ -63,6 +80,8 @@ require_once "ingredients.php";
 					</form>
 					<hr>
 					<?php }  ?>
+
+					<!-- END OF KEBABS LOOP -->
 
 
 				</div>

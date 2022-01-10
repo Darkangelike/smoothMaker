@@ -1,18 +1,24 @@
 <?php
 
 require_once "db.php";
-
-$modeEdition = false;
-
-if(
-    !empty($_GET['id']) && ctype_digit($_GET['id'])
+$modeEdition  = false;
+if(!empty($_GET['id']) && ctype_digit($_GET['id'])
     && isset($_GET['edition'])
+        ){
+                                                /*   $id = $_GET['id'];
 
-){
-    require_once "logique.php";
-    $modeEdition = true;
-}
+                                                    $sql = "SELECT * FROM kebabs WHERE id = '$id'";
 
+                                                    $resultat = mysqli_query($connexion, $sql);
+
+                                                    $kebab = $resultat->fetch_assoc();
+
+
+                                            */
+                $modeEdition  = true;
+                    require_once "logique.php";
+
+        }
 
 // logique de traitement de la creation et enregistrement d'un nouveau kebab
 //var_dump($_POST);
@@ -79,18 +85,18 @@ header("Location: kebab.php?id=$id");
 <div class="container">
 
 
-        <form method="post">
+        <form action="<?php if($modeEdition){echo "editKebab.php";} ?>" method="post">
 
             <div class="form-group">
-            <select value="3" name="viande" class="form-select" >
-                <?php if($modeEdition){ ?>
-
-                    <option value="<?= $kebab['viande'] ?>"><?= $viandes[$kebab['viande']-1] ?></option>
-
-                    <? }else{?>
+            <select name="viande" class="form-select" >
+ 
+               <?php if($modeEdition){?>
+                
+                <option value="<?= $kebab['viande'] ?>"> <?= $viandes[$kebab['viande']-1] ?>  </option>
+                
+                <?php }else{ ?>
                 <option >Selectionnez une viande</option>
-
-                <?php } ?>
+          <?php } ?>
                 <option value="1">Agneau</option>
                 <option value="2">Veau</option>
                 <option value="3">Dinde</option>
@@ -104,33 +110,31 @@ header("Location: kebab.php?id=$id");
              rows="10" 
              placeholder="Votre garniture"><?php if($modeEdition){echo $kebab['garniture'];} ?></textarea>
             
-             <div class="form-group">
-                    <select name="sauce" class="form-select" aria-label="Default select example">
-                    <?php if($modeEdition){ ?>
+          <select name="sauce" >
+          <?php if($modeEdition){?>
+                
+                <option value="<?= $kebab['sauce'] ?>"> <?= $sauces[$kebab['sauce']-1] ?>  </option>
+                
+                <?php }else{ ?>
+                <option >Selectionnez une sauce</option>
+          <?php } ?>
 
-<option value="<?= $kebab['sauce'] ?>"><?= $sauces[$kebab['sauce']-1] ?></option>
-
-<? }else{?>
-<option >Selectionnez une viande</option>
-
-<?php } ?>
                         <option value="1">Blanche</option>
                         <option value="2">Harissa</option>
                         <option value="3">Moutarde</option>
                     </select>
 
-            </div>
 
             <div class="form-group">
                     <select name="difficulte" class="form-select" aria-label="Default select example">
-                    <?php if($modeEdition){ ?>
 
-<option value="<?= $kebab['difficulte'] ?>"><?= $kebab['difficulte'] ?></option>
-
-<? }else{?>
-<option >Selectionnez une viande</option>
-
-<?php } ?>
+                    <?php if($modeEdition){?>
+                
+                <option value="<?= $kebab['difficulte'] ?>"> <?= $kebab['difficulte'] ?>  </option>
+                
+                <?php }else{ ?>
+                <option >Selectionnez une difficulte</option>
+          <?php } ?>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -140,11 +144,17 @@ header("Location: kebab.php?id=$id");
 
             </div>
 
+            <?php if($modeEdition) { ?>
+                <input type="hidden" name="id" value="<?= $kebab['id'] ?>">
+                
+                <?php } ?>
+
             <button type="submit" class="btn btn-success">Enregistrer</button>
 
 
         </form>
 
+ 
 
 
 </div>

@@ -49,6 +49,8 @@ require_once "logique.php";
                     <div class="cercle<?php if($kebab['difficulte']>$i ){echo " plein";} ?>"></div>
                 <?php }?>
 
+                <a href="createKebab.php?id=<?=$kebab['id']?>&edition" class="btn btn-warning">Editer</a>
+
                 </div>
 
         </div>

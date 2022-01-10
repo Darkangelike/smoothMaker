@@ -13,6 +13,7 @@ require_once "ingredients.php";
 			crossorigin="anonymous"/>
         <!-- Bootstrap ICONS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="css/style.css" />
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,6 +45,10 @@ require_once "ingredients.php";
                         <li>Difficulty: <?php for($i = 0; $i < $maxDifficulty; $i++) { ?>
                             <i class="bi bi-stopwatch<?php if ($i < $kebab["difficulty"]) { ?>-fill<?php } ?>"></i>
                         <?php } ?></li>
+						<li><form action="create.php">
+							<input type="hidden" name="edit">
+						<button type="submit" class="btn btn-info" name="id" value="<?= $kebab["id"] ?>">Edit</button>
+						</form></li>
                     </ul>                                
                 </h3>
                 <hr>

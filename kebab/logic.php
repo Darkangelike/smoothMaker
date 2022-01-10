@@ -1,8 +1,12 @@
 <?php
 
 require_once "db.php";
+
 $maxDifficulty = 5;
 $isRequested = false;
+$sql = "";
+
+$error = "Error: " . $sql . "<br>" . mysqli_error($myConnection);
 
 if (!empty($_GET["id"]) && ctype_digit($_GET["id"])) {
     $id = $_GET["id"];
@@ -28,7 +32,9 @@ if (!empty($_GET["id"]) && ctype_digit($_GET["id"])) {
 
 if ((isset($isRequested) && isset($query))
 && $isRequested && !$query) {
-    echo "Error: " . $sql . "<br>" . mysqli_error($myConnection);
+    echo $error;
 }
+
+
 
 ?>
