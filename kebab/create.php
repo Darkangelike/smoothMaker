@@ -9,7 +9,7 @@ if (
     && !empty($_POST["meat"]) && ctype_digit($_POST["meat"])
     && !empty($_POST["garnish"])
     && !empty($_POST["sauce"]) && ctype_digit($_POST["sauce"])
-    // && !empty($_POST["difficulty"]) && ctype_digit($_POST["difficulty"])
+    && !empty($_POST["difficulty"]) && ctype_digit($_POST["difficulty"])
 ) {
 
     $idMeat = $_POST["meat"];
@@ -17,9 +17,9 @@ if (
     $garnish = $_POST["garnish"];
     $idDifficulty = $_POST["difficulty"];
 
-    echo "ID meat : " . $idMeat . "<br>Garnish : " . $garnish . "<br>Sauce : " . $idSauce . "<br>Difficulty : " . $idDifficulty . "<br>";
+    echo "ID meat : " . $idMeat . "<br>Garnish : " . $garnish . "<br>Sauce : " . $idSauce . "<br>Difficulty : " . $idDifficulty . "<br><br>";
 
-    $sql = "INSERT INTO akebabs (meat, sauce, garnish, difficulty) VALUES ($idMeat, $idSauce, '$garnish', '$idDifficulty')";
+    $sql = "INSERT INTO kebabs (meat, sauce, garnish, difficulty) VALUES ($idMeat, $idSauce, '$garnish', '$idDifficulty')";
 
     $insertNewKebab = mysqli_query($myConnection, $sql);
     $query = $insertNewKebab;
@@ -29,8 +29,6 @@ if (
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($myConnection);
     };
-
-    echo "HELLO";
 
 }
 
@@ -77,7 +75,7 @@ if (
                                 Meats:
                                 <div class="container">
 
-                                    <?php for($i = 0; $i < sizeof($meats); $i++ ) { ?>
+                                    <?php for($i = 1; $i < sizeof($meats); $i++ ) { ?>
 
                                     <div>
                                         <input type="radio" name="<?php echo $str_meat ?>"  value="<?= $i ?>" id="<?= $meats[$i] ?>" required>
@@ -97,7 +95,7 @@ if (
                             <div class="d-flex mt-4">
                             Garnish:
                                 <div class="container">
-                                    <input id="garnish" name="garnish" type="textarea">
+                                    <input id="garnish" value="Onions" name="garnish" type="textarea">
                                 </div>
                             </div>
 
@@ -109,7 +107,7 @@ if (
                                 Sauces:
                                 <div class="container">
 
-                                    <?php for($i = 0; $i < sizeof($sauces); $i++ ) { ?>
+                                    <?php for($i = 1; $i < sizeof($sauces); $i++ ) { ?>
 
                                     <div>
                                         <input type="radio" name="<?php echo $str_sauce ; ?>"  value="<?= $i ?>" id="<?= $sauces[$i] ?>" required>
@@ -134,7 +132,7 @@ if (
                                     <!-- <input type="button" value="-" onClick="subtract_one()"> -->
 0
                                     
-                                    <input class="difficulty" type="range" min="0" max="<?= $maxDifficulty ?>" id="difficulty" step="1" value="<?= $maxDifficulty ?>" name="difficulty" onchange="show_value2(this.value)">
+                                    <input class="difficulty" type="range" min="1" max="<?= $maxDifficulty ?>" id="difficulty" step="1" value="<?= $maxDifficulty ?>" name="difficulty" onchange="show_value2(this.value)">
 
                                     <?= $maxDifficulty ?> 
 

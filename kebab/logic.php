@@ -15,22 +15,6 @@ if (!empty($_GET["id"]) && ctype_digit($_GET["id"])) {
         $isRequested = true; 
         // }
 
-// } else if (isset($_POST["create"])) {
-//     $idmeat = $_POST["meat"];
-//     $idsauce = $_POST["sauce"];
-//     $garnish = $_POST["garnish"];
-//     $difficulty = $_POST["difficulty"];
-
-//     echo "ID meat : " . $idmeat . "<br>ID sauce : " . $idsauce . "<br>Garnish : " . $garnish . "<br>Difficulty : " . $difficulty . "<br>";
-    
-//     $sql = "INSERT INTO akebabs (meat, sauce, garnish) VALUES ($idmeat, $idsauce, '$garnish')";
-
-//     $insertNewKebab = mysqli_query($myConnection, $sql);
-//     $query = $insertNewKebab;
-//         // if ($insertNewKebab) {
-//             $isRequested = true;   
-//         // }
-
 } else {
     $sql = "SELECT * FROM kebabs";
 
