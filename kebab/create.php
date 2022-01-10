@@ -26,6 +26,8 @@ if (
 
     if ($insertNewKebab) {
         echo "SENT";
+        $id = $myConnection->insert_id;
+        header("Location: kebab.php?id=$id");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($myConnection);
     };
@@ -67,7 +69,7 @@ if (
                 <hr>
                 
                     <div class="container justify-content-center d-flex">
-                        <form action="" method="POST">
+                        <form method="POST">
 
                             <!-- DIV RADIO MEAT -->
 
