@@ -2,6 +2,11 @@
 
 require_once "db.php";
 
+$id = null;
+$nom = null;
+$image = null;
+$ingredients = null;
+
 if (!empty($_GET["edit"]) && ctype_digit($_GET["edit"])) {
     $id = $_GET["edit"];
 
@@ -24,6 +29,10 @@ if (!empty($_POST["id"]) && ctype_digit($_POST["id"])
     $nom = htmlspecialchars($_POST["nom"]);
     $ingredients = htmlspecialchars($_POST["ingredients"]);
     $image = htmlspecialchars($_POST["image"]);
+
+}
+
+if ($id && $nom && $ingredients && $image) {
 
     $updateCocktail = $pdo->prepare("UPDATE cocktails SET nom = :nom, ingredients = :ingredients, image = :image WHERE id=:id");
 
