@@ -1,18 +1,20 @@
 <div class="container d-flex flex-wrap">
     <?php foreach($cocktails as $cocktail) { ?>
 
-        <div>
-            <form>
-                
-            </form>
-        </div>
-        <div>
-            <form>
+    <div class="cocktail-card m-4">
 
+            <form action="deleteCocktail.php" method="POST">
+                <button value="<?= $cocktail["id"] ?>" name="id" style="float:right" type="submit" class="btn btn-danger">X</button>
             </form>
-        </div>
+            <form action="editCocktail.php">
+                <button value="<?= $cocktail["id"] ?>" name="edit" style="float:right" type="submit" class="btn btn-info">Edit</button>
+            </form>
     
-    <div class="cocktail-card">
+            <form action="cocktail.php">
+                <button value="<?= $cocktail["id"] ?>" name="id" style="float:right" type="submit" class="btn btn-info">View</button>
+            </form>
+            
+
         <H1><?= $cocktail["nom"] ?></H1>
         <img src="images/<?= $cocktail["image"] ?>"/>
         <h3>Ingredients:</h3>
