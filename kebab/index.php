@@ -30,13 +30,10 @@ require_once "ingredients.php";
 
 		<main>
 			<div class="container text-center">
-				<div class="container">
 					<form action="create.php" style="float:right">
-						<button type="submit" class="btn btn-secondary">Create your own</button>
-					</form>
-				</div>					
-							
-				<div class="container">
+						<button id="buttonCreate" type="submit" class="btn btn-secondary">Create your own</button>
+					</form>		
+
 					<h1>List of fakebabs</h1>
 					<hr>
 
@@ -68,13 +65,11 @@ require_once "ingredients.php";
 					<?= $kebab["garnish"] ?>
 					+ 
 					<?= $sauces[$kebab["sauce"]] ?>
-					+ 
+					<br>
 					<?php for($i = 0; $i < $maxDifficulty; $i++) { ?>
 						<i class="bi bi-stopwatch<?php if ($i < $kebab["difficulty"]) { ?>-fill<?php } ?>"></i>
-					<?php } ?>
-						
-					</h3>
-					<p>A kebab that lacks inspiration</p>
+					<?php } ?><br></h3>
+
 					<form action="kebab.php">
 						<button type="submit" class="btn btn-info" name="id" value="<?= $kebab["id"] ?>">See more information</button>
 					</form>
@@ -84,7 +79,6 @@ require_once "ingredients.php";
 					<!-- END OF KEBABS LOOP -->
 
 
-				</div>
 			</div>
 		</main>
 	</body>
