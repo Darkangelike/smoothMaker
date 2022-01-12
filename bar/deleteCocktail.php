@@ -14,6 +14,8 @@ if (!$id) {
     die("This cocktail does not exist.");
 }
 
+$id = 100;
+
 // Check if cocktail id exists in the database
 
 $requestOneCocktail = $pdo->prepare("SELECT * FROM cocktails WHERE id= :cocktail_id");
@@ -27,10 +29,11 @@ $resultCocktail = $requestOneCocktail->fetch();
 // Stops the script if the request returns an empty object
 
 if (!$resultCocktail) {
-    die("This cocktail does not exist.");
+    header("Location: index.php");
+    exit();
 }
 
-// Prepare the delete request
+// Otherwise if resultCocktail is true & not empty: prepare the delete request
 
 $deleteRequest = $pdo->prepare("DELETE FROM cocktails WHERE id=:id");
 
@@ -40,6 +43,7 @@ $deleteRequest->execute([
 
 echo "<h1>The cocktail n°" . $id . " was successfully deleted.</h1><br><h2>You will be automatically redirected to the main page.</h3>";
 header("refresh: 2; url=index.php");
+exit();
 
 
 ?>

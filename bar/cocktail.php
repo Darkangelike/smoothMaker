@@ -9,7 +9,8 @@ if (!empty($_GET["id"]) && ctype_digit($_GET["id"])) {
 }
 
 if (!$id) {
-    die("Sorry, this cocktail does not exist.");
+    header("Location: index.php");
+    exit();
 }
 
 $requestOneCocktail = $pdo->prepare("SELECT * FROM cocktails WHERE id= :cocktail_id");
@@ -20,7 +21,15 @@ $requestOneCocktail->execute([
 
 $cocktail = $requestOneCocktail->fetch();
 
-$pageTitle = $cocktail["nom"];
+$requestComments = $pdo->prepare("SELECT * FROM comments WHERE cocktail_id= :cocktail_id");
+
+$requestComments->execute([
+    "cocktail_id" => $id
+]);
+
+$comments = $requestComments->fetchAll();
+
+$pageTitle = $cocktail["name"];
 
 ob_start();
 

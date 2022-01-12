@@ -3,7 +3,7 @@
 require_once "db.php";
 
 $id = null;
-$nom = null;
+$name = null;
 $image = null;
 $ingredients = null;
 
@@ -21,32 +21,33 @@ if (!empty($_GET["edit"]) && ctype_digit($_GET["edit"])) {
 }
 
 if (!empty($_POST["id"]) && ctype_digit($_POST["id"])
-    && !empty($_POST["nom"])
+    && !empty($_POST["name"])
     && !empty($_POST["ingredients"])
     && !empty($_POST["image"])
 ) {
     $id = $_POST["id"];
-    $nom = htmlspecialchars($_POST["nom"]);
+    $name = htmlspecialchars($_POST["name"]);
     $ingredients = htmlspecialchars($_POST["ingredients"]);
     $image = htmlspecialchars($_POST["image"]);
 
 }
 
-if ($id && $nom && $ingredients && $image) {
+if ($id && $name && $ingredients && $image) {
 
-    $updateCocktail = $pdo->prepare("UPDATE cocktails SET nom = :nom, ingredients = :ingredients, image = :image WHERE id=:id");
+    $updateCocktail = $pdo->prepare("UPDATE cocktails SET name = :name, ingredients = :ingredients, image = :image WHERE id=:id");
 
     $updateCocktail->execute([
         "id" => $id,
-        "nom" => $nom,
+        "name" => $name,
         "ingredients" => $ingredients,
         "image" => $image
     ]);
 
     header("Location: cocktail.php?id=$id");
+    exit();
 }
 
-$pageTitle = $cocktail["nom"];
+$pageTitle = $cocktail["name"];
 
 ob_start();
 

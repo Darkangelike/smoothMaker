@@ -26,6 +26,10 @@ $cocktail = $maRequetePourUnCocktail->fetch();
 
 
 
+
+
+$commentaires= [];
+
 $pageTitle = $cocktail['name'];
 
 ob_start();

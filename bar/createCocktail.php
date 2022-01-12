@@ -2,35 +2,35 @@
 
 require_once "db.php";
 
-$nom = null;
+$name = null;
 $ingredients = null;
 $image = null;
 $id = null;
 
 // CHECKING IF FORM IS CORRECT
 if (
-    !empty($_POST["nom"])
+    !empty($_POST["name"])
     && !empty($_POST["ingredients"])
     && !empty($_POST["image"])
 ) {
 
     // INITIALISING COCKTAIL VAR
 
-    $nom = htmlspecialchars($_POST["nom"]);
+    $name = htmlspecialchars($_POST["name"]);
     $ingredients = htmlspecialchars($_POST["ingredients"]);
     $image = htmlspecialchars($_POST["image"]);
 }
 
-if ($nom && $ingredients && $image) {
+if ($name && $ingredients && $image) {
 
     // PREPARING PDO
 
-    $createCocktail = $pdo->prepare("INSERT INTO cocktails (nom, ingredients, image) VALUES (:nom, :ingredients, :image)");
+    $createCocktail = $pdo->prepare("INSERT INTO cocktails (name, ingredients, image) VALUES (:name, :ingredients, :image)");
 
     // INSERTION OF NEW VALUE
 
     $createCocktail->execute([
-        "nom" => $nom,
+        "name" => $name,
         "ingredients" => $ingredients,
         "image" => $image
     ]);
@@ -47,7 +47,7 @@ if ($nom && $ingredients && $image) {
 }
 
 /*
-if (!$nom && !$ingredients && !$image) {
+if (!$name && !$ingredients && !$image) {
     die("Unable to create, data is invalid.");
 }
 */
