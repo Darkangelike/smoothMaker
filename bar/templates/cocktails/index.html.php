@@ -1,4 +1,4 @@
-<div class="container d-flex flex-wrap">
+<div class="card-group">
     <?php foreach($cocktails as $cocktail) { ?>
 
     <div class="cocktail-card m-4">
@@ -20,6 +20,7 @@
         <h3>Ingredients:</h3>
         <p><?= $cocktail["ingredients"] ?></p>
     </div>
+
     <?php } ?>
 </div>
 
