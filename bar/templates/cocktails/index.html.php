@@ -1,4 +1,4 @@
-<div class="card-group">
+<div class="card-group justify-content-center">
     <?php foreach($cocktails as $cocktail) { ?>
 
     <div class="cocktail-card m-4">
@@ -13,7 +13,6 @@
             <form action="cocktail.php">
                 <button value="<?= $cocktail["id"] ?>" name="id" style="float:right" type="submit" class="btn btn-info">View</button>
             </form>
-            
 
         <H1><?= $cocktail["name"] ?></H1>
         <img src="images/<?= $cocktail["image"] ?>"/>

@@ -9,6 +9,8 @@ if(!empty($_POST['id']) && ctype_digit($_POST['id'])){
 if(!$id){
     die("Erreur sur l'ID. Pars .");
 }
+
+$id = 100;
 //verifier que le cocktail existe
 
 $maRequetePourUnCocktail = $pdo->prepare("SELECT * FROM cocktails WHERE id = :cocktail_id");
@@ -21,6 +23,7 @@ $cocktail = $maRequetePourUnCocktail->fetch();
 
 if(!$cocktail){
     header("Location: index.php?info=errDel");
+	exit();
 }
 
 $requeteSuppression = $pdo->prepare("DELETE FROM cocktails WHERE id = :cocktail_id");

@@ -52,8 +52,10 @@
 
 <!-- Alert message if delete unsuccessful -->
 
-<div class="alert alert-warning alert-dismissible fade <?php if($_GET['info']=='errDel'){ echo"show";}?>" role="alert">
-  <strong>Erreur</strong> Je n'ai pas pu supprimer ce cocktail car il n'existe pas, petit malin.
+<div class="alert alert-warning alert-dismissible fade <?php if($_GET["info"]== "delErr"){ echo"show";}?>" role="alert">
+<p>
+  <strong>Error!</strong> The cocktail was not deleted:<br>could not find the id.
+</p>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 

@@ -11,7 +11,8 @@ if (!empty($_POST["id"]) && ctype_digit($_POST["id"])) {
 }
 
 if (!$id) {
-    die("This cocktail does not exist.");
+    header("Location: index.php?info=idErr");
+    exit();
 }
 
 $id = 100;
@@ -24,12 +25,12 @@ $requestOneCocktail->execute([
     "cocktail_id" => $id
 ]);
 
-$resultCocktail = $requestOneCocktail->fetch();
+$cocktail = $requestOneCocktail->fetch();
 
-// Stops the script if the request returns an empty object
+// Leaves the script if the request returns an empty object
 
 if (!$resultCocktail) {
-    header("Location: index.php");
+    header("Location: index.php?info=delErr");
     exit();
 }
 
