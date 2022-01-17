@@ -22,6 +22,10 @@
   <strong>Erreur</strong> Je n'ai pas pu supprimer ce cocktail car il n'existe pas, petit malin.
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+<div class="alert alert-warning alert-dismissible fade <?php if($_GET['info']=='noId'){ echo"show";}?>" role="alert">
+  <strong>Erreur</strong> ce cocktail n'existe pas, petit malin.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <div class="container">
             
 

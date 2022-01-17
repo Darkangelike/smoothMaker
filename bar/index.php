@@ -1,19 +1,14 @@
 <?php 
 
-require_once "db.php";
+require_once "core/libraries/db.php";
+require_once "core/libraries/tools.php";
 
-$requestAllCocktails = $pdo->query("SELECT * FROM cocktails");
+// Controller
 
-$cocktails = $requestAllCocktails->fetchAll();
+$cocktails = findAllCocktails();
 
 $pageTitle = "Every cocktails";
 
-ob_start();
-
-require_once "templates/cocktails/index.html.php";
-
-$pageContent = ob_get_clean();
-
-require_once "templates/layout.html.php";
+render("cocktails/index", compact("cocktails", "pageTitle"));
 
 ?>

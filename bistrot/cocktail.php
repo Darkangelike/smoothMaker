@@ -1,6 +1,11 @@
 <?php 
 
-require_once "db.php";
+require_once "core/libraries/db.php";
+require_once "core/libraries/tools.php";
+
+    $pdo = getPdo();
+
+    
 
 $id = null;
 
@@ -9,7 +14,9 @@ if(!empty($_GET['id']) && ctype_digit($_GET['id'])){
 }
 
 if(!$id){
-    die('Désole, je ne trouve pas ce cocktail');
+   // die('Désole, je ne trouve pas ce cocktail');
+    header("Location: index.php?info=noId");
+    exit();
 }
 
 
@@ -26,19 +33,29 @@ $cocktail = $maRequetePourUnCocktail->fetch();
 
 
 
+if(!$cocktail){
+    header("Location: index.php?info=noId");
+    exit();
+}
+
+$maRequetePourDesCommentaires = $pdo->prepare("SELECT * FROM comments 
+                WHERE cocktail_id = :cocktail_id");
+
+$maRequetePourDesCommentaires->execute([
+    "cocktail_id" => $id
+]);
+
+$commentaires= $maRequetePourDesCommentaires->fetchAll();
 
 
-$commentaires= [];
+
 
 $pageTitle = $cocktail['name'];
 
-ob_start();
 
-require_once "templates/cocktails/show.html.php";
 
-$pageContent = ob_get_clean();
 
-require_once "templates/layout.html.php";
+render("cocktails/show",compact('cocktail', 'commentaires', 'pageTitle'));
 
 
 ?>

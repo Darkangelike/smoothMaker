@@ -1,6 +1,7 @@
 <?php
 
-require_once "db.php";
+require_once "core/libraries/db.php";
+require_once "core/libraries/tools.php";
 
 $id = null;
 
@@ -9,35 +10,16 @@ if (!empty($_GET["id"]) && ctype_digit($_GET["id"])) {
 }
 
 if (!$id) {
-    header("Location: index.php");
-    exit();
+    redirect("index.php");
 }
 
-$requestOneCocktail = $pdo->prepare("SELECT * FROM cocktails WHERE id= :cocktail_id");
+$cocktail = findCocktailById($id);
 
-$requestOneCocktail->execute([
-    "cocktail_id" => $id
-]);
-
-$cocktail = $requestOneCocktail->fetch();
-
-$requestComments = $pdo->prepare("SELECT * FROM comments WHERE cocktail_id= :cocktail_id");
-
-$requestComments->execute([
-    "cocktail_id" => $id
-]);
-
-$comments = $requestComments->fetchAll();
+$commentaires = findAllCommentsByCocktail($id);
 
 $pageTitle = $cocktail["name"];
 
-ob_start();
-
-require_once "templates/cocktails/show.html.php";
-
-$pageContent = ob_get_clean();
-
-require_once "templates/layout.html.php"
+render("cocktails/show", compact("cocktail", "commentaires", "pageTitle"));
 
 ?>
 

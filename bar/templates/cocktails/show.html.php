@@ -1,4 +1,4 @@
- <div class="container">
+<div class="card-group justify-content-center">
 
     <div class="card bg-light mb-3 cocktail-card" style="max-width: 18rem;">
 
@@ -16,31 +16,49 @@
                 <img src="images/<?= $cocktail["image"] ?>"/>
                 <h3>Ingredients:</h3>
                 <p class="card-text"><?= $cocktail["ingredients"] ?></p>
-                <?php $i = 0; if ($comments) { foreach($comments as $comment) { $i++; ?> 
+                <?php $i = 0; if ($commentaires) { foreach($commentaires as $commentaire) { $i++; ?> 
                     <div class="card-footer text-muted">
-                        <div><p class="text-left" style="font-size:10px">Comment n°<?= $i ?></p>
-                        <h3><?= $comment["author"] ?></h3></div>
+                        <form action="deleteComment.php?id=<?= $commentaire["id"] ?>" method="POST">
+                            <input type="hidden" name="cocktail_id" value="<?= $cocktail['id'] ?>">
+                            <button value="<?= $commentaire["id"] ?>" name="commentaire_id" style="float:right" type="submit" class="btn btn-danger">X</button>
+                        </form>
+                        <div>
+                            <p class="text-left" style="font-size:10px">Comment n°<?= $i ?></p>
+                            <h3><?= $commentaire["author"] ?></h3>
+                        </div>
                         
-                        <p><?= $comment["content"] ?></p>
+                        <p><?= $commentaire["content"] ?></p>
                     </div>
                 <?php } ?>
             <div class="card-footer text-muted">
-                        <form action="createComment.php">
-                            <button type="submit" name="id" value="<?= $cocktail["id"] ?>" class="btn btn-info">Add a comment</button> 
+                        <form action="createComment.php" method="POST">
+                        <div class="form-group">
+                            <input placeholder="Your name"  type="text" name="author"></div>
+                        <div class="form-group">
+                            <textarea placeholder="Your comment" type="text" name="content"></textarea></div>
+                        <div class="form-group">
+                            <button type="submit" name="cocktail_id" value="<?= $cocktail['id'] ?>" class="btn btn-info">Add a comment</button>
+                        </div>
                         </form>
                         
                     </div>
             <?php } else { ?>
-                    <div class="card-footer text-muted">
-                        <form action="createComment.php">
-                           <p>Be the first to comment this cocktail.</p>
-                            <button type="submit" name="id" value="<?= $cocktail["id"] ?>" class="btn btn-info">Add a comment</button> 
-                        </form>
-                        
-                    </div>
+                <div class="card-footer text-muted">
+                    <p>Be the first to comment!</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <form action="createComment.php" method="POST">
+                        <div class="form-group">
+                            <input placeholder="Your name"  type="text" name="author"></div>
+                        <div class="form-group">
+                            <textarea placeholder="Your comment" type="text" name="content"></textarea></div>
+                        <div class="form-group">
+                            <button name='cocktail_id' value="<?= $cocktail['id'] ?>" class="btn btn-success">Post</button>
+                        </div>
+                    </form>
+                    
+                </div>
                 <?php } ?>
-
-
                 
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
